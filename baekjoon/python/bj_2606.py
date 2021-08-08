@@ -1,25 +1,48 @@
-# first try
-# 예제입력 성공
+from collections import deque
+
 T = int(input())
-
 C = int(input())
+infected = [0] * (T + 1)
 
-infect = [int(v) for v in list(input().split())]
+virus = 0
 
-for i in range(C - 1):
-    con = [int(v) for v in list(input().split())]
-    
-    while con:
-        b = con.pop(0)
-        if b in infect:
-            infect.append(b)
-            infect.append(con.pop())
-        else:
-            if con[0] in infect:
-                infect.append(b)
-                infect.append(con.pop())
-            else:
-                con.pop()
+graph = [[0]*(T+1) for _ in range(T+1)]
+# print(graph)
 
-print(len(set(infect)) -1)
+for i in range(C):
 
+    x, y = map(int, input().split())
+    graph[x][y] = graph[y][x] = 1
+
+
+# [[0, 0, 0, 0, 0, 0, 0, 0], 
+# [0, 0, 1, 0, 0, 1, 0, 0], 
+# [0, 1, 0, 1, 0, 1, 0, 0], 
+# [0, 0, 1, 0, 0, 0, 0, 0], 
+# [0, 0, 0, 0, 0, 0, 0, 1], 
+# [0, 1, 1, 0, 0, 0, 1, 0], 
+# [0, 0, 0, 0, 0, 1, 0, 0], 
+# [0, 0, 0, 0, 1, 0, 0, 0]]
+
+
+def bfs(virus, infected):
+
+    count = 0
+
+    queue = deque()
+    queue.append(virus)
+    infected[virus] = 1
+
+    while queue:
+        virus = queue.popleft()
+
+        for i in range(1, (T + 1)):
+
+            if graph[virus][i] == 1 and infected[i] == 0:
+                queue.append(i)
+                count += 1
+                infected[i] = 1
+        
+    print(count)
+
+bfs(1, infected)
