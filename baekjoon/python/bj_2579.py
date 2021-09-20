@@ -1,31 +1,27 @@
-N = int(input())
+import sys
+N = int(sys.stdin.readline())
 
-steps = [int(input()) for _ in range(N)]
-# for i in range(N):
-#     steps.append(int(input()))
-    
-# steps = [10, 20, 15, 25, 10, 20]
-# steps = [11, 20, 30, 10, 15, 10, 18]
+steps = [int(sys.stdin.readline()) for _ in range(N)]
+dp = []
 
-# def solution(steps):
-#     if len(steps) <= 2:
-#         return (sum(steps))
-#     else:
-#         for i in range(len(steps)-1, 2, -1): 
-#             answer = steps[i] #20
-#             steps[i-2] = answer + max(steps[i-1], steps[i-2])
-#             return solution(steps[:i-1])
+if N == 1:
+    print(steps[0])
+    exit()
+elif N == 2:
+    print(max(steps[1], steps[0] + steps[1]))
+    exit()
 
-# print(solution(steps))
+dp.append(steps[0])
+dp.append(steps[0] + steps[1])
+dp.append(max(steps[0] + steps[2], steps[1] + steps[2]))
+# [10, 30, 35]
 
-def solution(steps):
-    if len(steps) <= 2:
-        return (sum(steps))
-    else:
-        for i in range(len(steps)-1, len(steps)-4, -1): 
-            answer = steps[i] #20
-            steps[i-2] = answer + max(steps[i-1], steps[i-2])
-            return solution(steps[:i-1])
+print(dp)
+
+for i in range(3, N):
+    dp.append(max(dp[i-2] + steps[i], dp[i-3] + steps[i-1] + steps[i]))
+    print(dp)
+
+print(dp[-1])
 
 
-print(solution(steps))
