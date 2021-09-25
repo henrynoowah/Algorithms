@@ -1,6 +1,6 @@
 function solution(priorities, location) {
     
-    var answer = 0
+    let answer = 0
     let indexList = []
     for (let i = 0 ; i < priorities.length ; i++) {
         indexList.push(i)

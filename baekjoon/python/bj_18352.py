@@ -58,6 +58,8 @@ for _ in range(M):
     num = list(map(int, input().split()))
     location[num[0]].append(num[1])
 
+print(location)
+
 heap = []
 heapq.heappush(heap, [0, X])
 # 반복문에서 시간초과
