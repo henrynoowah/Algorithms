@@ -1,12 +1,14 @@
+from collections import deque
+
 def solution(priorities, location):
-    indexList = [i for i in range(len(priorities))]
+    indexList = deque([i for i in range(len(priorities))])
     # [0,1,2,3]
     answer = 0
     # highest priority
     maximum = max(priorities)
     
     while indexList:
-        index = indexList.pop(0)
+        index = indexList.popleft()
         # maximum 보다 우선순위가 낮으면 맨 뒤로 보냄
         if priorities[index] < maximum:
             indexList.append(index)
