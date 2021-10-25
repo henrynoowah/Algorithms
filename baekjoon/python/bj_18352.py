@@ -72,13 +72,6 @@ while heap:
             dist[loc] = cnt
             heapq.heappush(heap, [cnt, loc])
 
-# if K not in dist:
-#     print(-1)
-#     exit()
-# else:
-#     for i in range(len(dist)):
-#         if dist[i] == K:
-#             print(i)
 result = []
 
 for i in range(len(dist)):
